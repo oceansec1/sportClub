@@ -57,11 +57,11 @@ public class EduTeacher implements Serializable {
     private Integer status;
 
     @ApiModelProperty(value = "创建时间")
-    @TableField("CREATE_TIME")
+    @TableField(value = "CREATE_TIME",fill = FieldFill.INSERT)
     private Date createTime;
 
     @ApiModelProperty(value = "更新时间")
-    @TableField("UPDATE_TIME")
+    @TableField(value = "UPDATE_TIME",fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     @ApiModelProperty(value = "专业ID")

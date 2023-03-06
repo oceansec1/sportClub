@@ -8,8 +8,10 @@ import com.sport.common_utils.R;
 import com.sport.eduservice.entity.EduTeacher;
 import com.sport.eduservice.entity.vo.TeacherQuery;
 import com.sport.eduservice.service.impl.EduTeacherServiceImpl;
+import com.sport.exceptionhandler.SportException;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,6 +49,11 @@ public class EduTeacherController {
     public R pageListTeacher(@PathVariable long current,@PathVariable long limit){
         //创建配置对象
         Page<EduTeacher> pageTeacher=new Page<>(current,limit);
+        try {
+            int i=10/0;
+        }catch (Exception e){
+            throw new SportException(2001,"执行了特定异常");
+        }
         //调用方法
         eduTeacherService.page(pageTeacher,null);
         //总条数
@@ -55,17 +62,66 @@ public class EduTeacherController {
         List<EduTeacher> records = pageTeacher.getRecords();
         return R.success().data("total",total).data("records",records);
     }
-    @GetMapping("pageTeacherCondition/{current}/{limit}")
-    public  R pageTeacherCondition(@PathVariable long current, @PathVariable long limit, TeacherQuery teacherQuery){
+    @PostMapping("pageTeacherCondition/{current}/{limit}")
+    public  R pageTeacherCondition(@PathVariable long current, @PathVariable long limit, @RequestBody(required = false) TeacherQuery teacherQuery){
         Page<EduTeacher> page=new Page<>(current,limit);
         //条件构造器
         QueryWrapper<EduTeacher> queryWrapper=new QueryWrapper<>();
         eduTeacherService.page(page,queryWrapper);
+
+        //动态SQL
+
+        String name = teacherQuery.getName();
+        Integer level = teacherQuery.getLevel();
+        String begin = teacherQuery.getBegin();
+        String end = teacherQuery.getEnd();
+        //判断条件值是否为空
+        if (!StringUtils.isEmpty(name)){
+            queryWrapper.like("name",name);
+        }
+        if (!StringUtils.isEmpty(level)){
+            queryWrapper.eq("level",level);
+        }
+        if (!StringUtils.isEmpty(begin)){
+            queryWrapper.gt("create_time",begin);
+        }
+        if (!StringUtils.isEmpty(end)){
+            queryWrapper.le("create_time",end);
+        }
         //总条数
         long total = page.getTotal();
         //list数据集合
         List<EduTeacher> records = page.getRecords();
         return R.success().data("total",total).data("records",records);
     }
+    //添加
+    @PostMapping("addTeacher")
+    public R addTeacher(@RequestBody EduTeacher eduTeacher){
+        boolean save = eduTeacherService.save(eduTeacher);
+        if (save){
+            return R.success();
+        }
+        else {
+            return R.error();
+        }
+    }
+    //根据讲师id查询
+    @GetMapping("getTeacher/{id}")
+        public R getTeacher(@PathVariable String id){
+        EduTeacher byId = eduTeacherService.getById(id);
+        return R.success().data("teacher",byId);
+    }
+    //修改/
+    @PostMapping("updateTeacher")
+        public R updateTeacher(@RequestBody EduTeacher eduTeacher){
+        boolean flag = eduTeacherService.updateById(eduTeacher);
+        if (flag){
+            return R.success();
+        }
+        else {
+            return R.error();
+        }
+    }
+
 }
 
