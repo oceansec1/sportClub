@@ -1,0 +1,13 @@
+server:
+  port: 8002
+spring:
+  application:
+    name: service_oss
+  profiles:
+    active: dev
+aliyun:
+  oss:
+    end-point: oss-cn-beijing.aliyuncs.com
+    access-key-id: LTAI5tNEWzJZtaMRQLKCBsuZ
+    access-key-secret: S6HGuslH5LbnFpk9CTOUsSCCrI9GoJ
+    bucket-name: sport-club

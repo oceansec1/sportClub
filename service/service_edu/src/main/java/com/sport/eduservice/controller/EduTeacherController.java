@@ -1,6 +1,4 @@
 package com.sport.eduservice.controller;
-
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -26,6 +24,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/eduservice/teacher")
+@CrossOrigin//跨域
 public class EduTeacherController {
     @Autowired
     private EduTeacherServiceImpl eduTeacherService;
@@ -67,10 +66,8 @@ public class EduTeacherController {
         Page<EduTeacher> page=new Page<>(current,limit);
         //条件构造器
         QueryWrapper<EduTeacher> queryWrapper=new QueryWrapper<>();
-        eduTeacherService.page(page,queryWrapper);
 
         //动态SQL
-
         String name = teacherQuery.getName();
         Integer level = teacherQuery.getLevel();
         String begin = teacherQuery.getBegin();
@@ -80,14 +77,17 @@ public class EduTeacherController {
             queryWrapper.like("name",name);
         }
         if (!StringUtils.isEmpty(level)){
-            queryWrapper.eq("level",level);
+            queryWrapper.eq("IS_STAR",level);
         }
         if (!StringUtils.isEmpty(begin)){
-            queryWrapper.gt("create_time",begin);
+            queryWrapper.gt("CREATE_TIME",begin);
         }
         if (!StringUtils.isEmpty(end)){
-            queryWrapper.le("create_time",end);
+            queryWrapper.le("CREATE_TIME",end);
         }
+        //排序
+        queryWrapper.orderByDesc("CREATE_TIME");
+        eduTeacherService.page(page,queryWrapper);
         //总条数
         long total = page.getTotal();
         //list数据集合
