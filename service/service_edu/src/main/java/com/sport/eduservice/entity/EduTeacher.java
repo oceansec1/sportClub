@@ -20,8 +20,8 @@ import lombok.experimental.Accessors;
  * @since 2023-02-25
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+/*@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)*/
 @ApiModel(value="EduTeacher对象", description="讲师")
 @TableName("edu_teacher")
 public class EduTeacher implements Serializable {
@@ -29,14 +29,14 @@ public class EduTeacher implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "教师ID")
-    @TableId(value = "ID", type = IdType.AUTO)
-    private Integer id;
+    @TableId
+    private String id;
 
     @ApiModelProperty(value = "教师名称")
-    @TableField("NAME")
+    //@TableField("NAME")
     private String name;
 
-    @ApiModelProperty(value = "教师资历,一句话说明老师")
+    /*@ApiModelProperty(value = "教师资历,一句话说明老师")
     @TableField("EDUCATION")
     private String education;
 
@@ -75,5 +75,5 @@ public class EduTeacher implements Serializable {
     @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
     @TableLogic
     @TableField(value = "is_deleted") // 和表的字段映射的
-    private Integer deleted;
+    private Integer deleted;*/
 }

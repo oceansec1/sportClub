@@ -36,8 +36,9 @@
         <aliyun-sdk-oss.version>3.1.0</aliyun-sdk-oss.version>
         <aliyun-java-sdk-vod.version>2.15.0</aliyun-java-sdk-vod.version>
         <aliyun-sdk-vod-upload.version>1.4.6</aliyun-sdk-vod-upload.version>
-        <fastjson.version>1.2.28</fastjson.version>
+        <fastjson.version>1.2.73</fastjson.version>
         <json.version>20170516</json.version>
+        <fastjson.dataformat.version>2.9.9</fastjson.dataformat.version>
     </properties>
     <dependencyManagement>
 
@@ -140,8 +141,6 @@
                 <artifactId>jjwt</artifactId>
                 <version>${jwt.version}</version>
             </dependency>
-
-
             <!--aliyun-->
             <dependency>
                 <groupId>com.aliyun</groupId>
@@ -163,17 +162,27 @@
                 <artifactId>aliyun-sdk-vod-upload</artifactId>
                 <version>${aliyun-sdk-vod-upload.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>${json.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.json</groupId>
-                <artifactId>json</artifactId>
-                <version>${json.version}</version>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-cbor</artifactId>
+                <version>${fastjson.dataformat.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-xml</artifactId>
+                <version>${fastjson.dataformat.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>

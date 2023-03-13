@@ -10,13 +10,26 @@ spring:
     active: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/sport?serverTimezone=UTC&characterEncoding=utf8
-
-    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/sport?useUnicode=true&characterEncoding=UTF-8&useSSL=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
+   # type: com.zaxxer.hikari.HikariDataSource
     username: root
-    password: 123
+    password: java_zz
   main:
     allow-bean-definition-overriding: true
+eureka:
+  client:
+    register-with-eureka: false # 表示不向注册中心注册
+    fetch-registry: false # 由于注册中心的职责就是维护服务实例，所以它不需要去检索服务
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.sport.eduservice.entity
+  global-config:
+    #数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID", ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: UUID
+    banner: false
 #mybatis-plus:
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
