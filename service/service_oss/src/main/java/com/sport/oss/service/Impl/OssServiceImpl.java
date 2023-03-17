@@ -4,6 +4,7 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.sport.oss.service.OssService;
 import com.sport.utils.ConstantPropertiesUtils;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.UUID;
 
 @Service
 public class OssServiceImpl implements OssService {
@@ -38,6 +40,14 @@ public class OssServiceImpl implements OssService {
             InputStream inputStream= file.getInputStream();
             //获取文件名
             String fileName = file.getOriginalFilename();
+            //文件名加入随机值
+            String uuid = UUID.randomUUID().toString().replaceAll("-","");
+            fileName=uuid+fileName;
+            //拼接
+            //获取当天日期
+            String datePath = new DateTime().toString("yyy/MM/dd");
+            //拼接
+            fileName=datePath+"/"+fileName;
             //实现上传
             ossClient.putObject(bucketName,fileName,inputStream);
             //关闭

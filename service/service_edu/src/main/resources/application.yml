@@ -13,7 +13,7 @@ spring:
     url: jdbc:mysql://localhost:3306/sport?useUnicode=true&characterEncoding=UTF-8&useSSL=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
    # type: com.zaxxer.hikari.HikariDataSource
     username: root
-    password: java_zz
+    password: 123
   main:
     allow-bean-definition-overriding: true
 eureka:

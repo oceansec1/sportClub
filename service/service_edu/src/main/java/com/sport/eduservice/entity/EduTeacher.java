@@ -36,7 +36,7 @@ public class EduTeacher implements Serializable {
     //@TableField("NAME")
     private String name;
 
-    /*@ApiModelProperty(value = "教师资历,一句话说明老师")
+    @ApiModelProperty(value = "教师资历,一句话说明老师")
     @TableField("EDUCATION")
     private String education;
 
@@ -75,5 +75,5 @@ public class EduTeacher implements Serializable {
     @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
     @TableLogic
     @TableField(value = "is_deleted") // 和表的字段映射的
-    private Integer deleted;*/
+    private Integer deleted;
 }
