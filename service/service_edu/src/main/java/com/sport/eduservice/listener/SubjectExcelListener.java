@@ -9,14 +9,13 @@ import com.sport.eduservice.service.EduSubjectService;
 import com.sport.exceptionhandler.SportException;
 
 public class SubjectExcelListener extends AnalysisEventListener<SubjectData> {
-
-    public SubjectExcelListener(EduSubjectService service) {
-        this.subjectService = service;
-    }
-    public SubjectExcelListener() {
-
-    }
     public EduSubjectService subjectService;
+    public SubjectExcelListener() {}
+    public SubjectExcelListener(EduSubjectService subjectService) {
+        this.subjectService = subjectService;
+    }
+
+
     //一行一行读取
     @Override
     public void invoke(SubjectData subjectData, AnalysisContext analysisContext) {

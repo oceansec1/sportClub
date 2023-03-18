@@ -1,7 +1,11 @@
 package com.sport.eduservice.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sport.eduservice.entity.EduSubject;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.sport.eduservice.entity.subject.OneSubject;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface EduSubjectMapper extends BaseMapper<EduSubject> {
 
+    List<EduSubject> selectList(QueryWrapper<OneSubject> wrapperOne);
 }
