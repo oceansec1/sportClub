@@ -24,8 +24,10 @@ public class EduCourseController {
     private EduCourseService courseService;
 @PostMapping("addCourseInfo")
     public R addCourseInfo(@RequestBody CourseInfoVo courseInfoVo){
-    courseService.saveCourseInfo(courseInfoVo);
-    return R.success();
+    //返回添加之后的id
+
+     String id=courseService.saveCourseInfo(courseInfoVo);
+    return R.success().data("courseId",id);
 }
 }
 

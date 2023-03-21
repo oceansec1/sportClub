@@ -2,6 +2,7 @@ package com.sport.oss.controller;
 
 import com.sport.common_utils.R;
 import com.sport.oss.service.OssService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import java.io.FileNotFoundException;
 @RestController
 @RequestMapping("/eduoss/fileoss")
 @CrossOrigin
+@Slf4j
 public class OssController {
 @Autowired
 private OssService ossService;
@@ -21,6 +23,7 @@ private OssService ossService;
     @PostMapping
     public R uploadOssFile(MultipartFile file) throws FileNotFoundException {
     String url = ossService.uploadFileAvatar(file);
-        return R.success().data("url",url);
+        log.info("url is         -------------"+url);
+    return R.success().data("url",url);
     }
 }

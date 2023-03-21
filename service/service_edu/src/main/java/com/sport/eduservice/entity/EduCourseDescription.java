@@ -27,13 +27,13 @@ import lombok.experimental.Accessors;
 public class EduCourseDescription implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @TableId(value = "id")
+    @TableId(value = "id",type = IdType.INPUT)
     private String id;
     private String description;
-    @TableField(value = "gmt_create",fill = FieldFill.INSERT)
-    private Date gmtCreate;
-    @TableField(value = "gmt_modified",fill = FieldFill.INSERT_UPDATE)
-    private Date gmtModified;
+    @TableField(value = "create_time",fill = FieldFill.INSERT)
+    private Date createTime;
+    @TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
 
 
 }

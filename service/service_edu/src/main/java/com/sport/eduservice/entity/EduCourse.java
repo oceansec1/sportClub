@@ -54,11 +54,10 @@ public class EduCourse implements Serializable {
     private String version;
 
     private String status;
-    @TableField(value = "gmt_create",fill = FieldFill.INSERT)
-    private Date gmtCreate;
-    @TableField(value = "gmt_modified",fill = FieldFill.INSERT_UPDATE)
-    private Date gmtModified;
-
+    @TableField(value = "create_time",fill = FieldFill.INSERT)
+    private Date createTime;
+    @TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
     private String description;
 
 }

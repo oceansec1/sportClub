@@ -4,6 +4,7 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.sport.oss.service.OssService;
 import com.sport.utils.ConstantPropertiesUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.io.InputStream;
 import java.util.UUID;
 
 @Service
+@Slf4j
 public class OssServiceImpl implements OssService {
     @Value("${aliyun.oss.end-point}")
     private String endpoint;
@@ -55,6 +57,7 @@ public class OssServiceImpl implements OssService {
             //路径返回，拼接
             //https://sport-club.oss-cn-beijing.aliyuncs.com/001.jpg
             String url="https://"+bucketName+"."+endpoint+"/"+fileName;
+            log.info("url is         -------------"+url);
             return url;
         }catch (Exception e){
         e.printStackTrace();

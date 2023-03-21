@@ -14,6 +14,6 @@ import com.sport.eduservice.entity.vo.CourseInfoVo;
  */
 public interface EduCourseService extends IService<EduCourse> {
     //添加课程基本信息
-    void saveCourseInfo(CourseInfoVo courseInfoVo);
+    String saveCourseInfo(CourseInfoVo courseInfoVo);
 
 }

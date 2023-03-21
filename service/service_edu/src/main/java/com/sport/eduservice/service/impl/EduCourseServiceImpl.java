@@ -8,7 +8,6 @@ import com.sport.eduservice.service.EduCourseDescriptionService;
 import com.sport.eduservice.service.EduCourseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sport.exceptionhandler.SportException;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +25,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 @Autowired
 private EduCourseDescriptionService eduCourseDescriptionService;
     @Override
-    public void saveCourseInfo(CourseInfoVo courseInfoVo) {
+    public String saveCourseInfo(CourseInfoVo courseInfoVo) {
         //向课程表添加课程基本信息
         EduCourse eduCourse=new EduCourse();
         BeanUtils.copyProperties(courseInfoVo,eduCourse);
@@ -34,9 +33,14 @@ private EduCourseDescriptionService eduCourseDescriptionService;
         if (insert<=0){
             throw new SportException(20001,"添加失败");
         }
+        //获取添加之后的id
+        String cid = eduCourse.getId();
         //向课程简介表添加数据
         EduCourseDescription courseDescription=new EduCourseDescription();
         courseDescription.setDescription(courseInfoVo.getDescription());
+        //设置描述id就是课程id
+        courseDescription.setId(cid);
         eduCourseDescriptionService.save(courseDescription);
+        return cid;
     }
 }

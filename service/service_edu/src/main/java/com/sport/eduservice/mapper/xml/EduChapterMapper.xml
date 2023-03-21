@@ -2,4 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sport.eduservice.mapper.EduChapterMapper">
 
+    <select id="selectList" resultType="com.sport.eduservice.entity.EduChapter"
+            parameterType="com.baomidou.mybatisplus.core.conditions.query.QueryWrapper&lt;com.sport.eduservice.entity.chapter.ChapterVo&gt;"></select>
 </mapper>
