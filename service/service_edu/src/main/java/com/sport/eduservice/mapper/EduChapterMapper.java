@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sport.eduservice.entity.EduChapter;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.sport.eduservice.entity.chapter.ChapterVo;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  * @author WangHaiYang
  * @since 2023-03-18
  */
+@Mapper
 public interface EduChapterMapper extends BaseMapper<EduChapter> {
 
     List<EduChapter> selectList(QueryWrapper<ChapterVo> wrapperChapter);

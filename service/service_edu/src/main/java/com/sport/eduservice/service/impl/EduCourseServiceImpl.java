@@ -3,6 +3,7 @@ package com.sport.eduservice.service.impl;
 import com.sport.eduservice.entity.EduCourse;
 import com.sport.eduservice.entity.EduCourseDescription;
 import com.sport.eduservice.entity.vo.CourseInfoVo;
+import com.sport.eduservice.entity.vo.CoursePublishVo;
 import com.sport.eduservice.mapper.EduCourseMapper;
 import com.sport.eduservice.service.EduCourseDescriptionService;
 import com.sport.eduservice.service.EduCourseService;
@@ -42,5 +43,40 @@ private EduCourseDescriptionService eduCourseDescriptionService;
         courseDescription.setId(cid);
         eduCourseDescriptionService.save(courseDescription);
         return cid;
+    }
+
+    @Override
+    public CourseInfoVo getCourseInfo(String courseId) {
+        //查询课程表
+        EduCourse eduCourse = baseMapper.selectById(courseId);
+        CourseInfoVo courseInfoVo=new CourseInfoVo();
+        BeanUtils.copyProperties(eduCourse,courseInfoVo);
+        //查询描述表
+        EduCourseDescription courseDescription = eduCourseDescriptionService.getById(courseId);
+        courseInfoVo.setDescription(courseDescription.getDescription());
+        return courseInfoVo;
+    }
+
+    @Override
+    public void updateCourseInfo(CourseInfoVo courseInfoVo) {
+        //修改课程表
+        EduCourse eduCourse=new EduCourse();
+        BeanUtils.copyProperties(courseInfoVo,eduCourse);
+        int update = baseMapper.updateById(eduCourse);
+        if (update==0){
+            throw  new SportException(20001,"修改失败");
+        }
+        //修改描述表
+        EduCourseDescription eduCourseDescription=new EduCourseDescription();
+        eduCourseDescription.setId(courseInfoVo.getId());
+        eduCourseDescription.setDescription(courseInfoVo.getDescription());
+        eduCourseDescriptionService.updateById(eduCourseDescription);
+    }
+
+    @Override
+    public CoursePublishVo publishCourseInfo(String id) {
+        //调用mapper
+        CoursePublishVo publishCourseInfo = baseMapper.getPublishCourseInfo(id);
+        return publishCourseInfo;
     }
 }

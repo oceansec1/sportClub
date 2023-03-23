@@ -9,6 +9,7 @@ import com.sport.eduservice.mapper.EduChapterMapper;
 import com.sport.eduservice.service.EduChapterService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sport.eduservice.service.EduVideoService;
+import com.sport.exceptionhandler.SportException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         List<ChapterVo> finalList=new ArrayList<>();
         //封装
         for (int i = 0; i < eduChapterList.size(); i++) {
-            EduChapter eduChapter=new EduChapter();
+            EduChapter eduChapter=eduChapterList.get(i);
             ChapterVo chapterVo=new ChapterVo();
             BeanUtils.copyProperties(eduChapter,chapterVo);
             finalList.add(chapterVo);
@@ -60,5 +61,20 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         }
 
         return finalList;
+    }
+
+    @Override
+    public boolean deleteChapter(String chapterId) {
+        //根据chapter章节id查询小节，有就不进行删除
+        QueryWrapper<EduVideo> wrapper=new QueryWrapper<>();
+        wrapper.eq("chapter_id",chapterId);
+        int count = eduVideoService.count(wrapper);
+        if (count > 0){
+            throw new SportException(20001,"不能删除");
+        }else {
+            int result = baseMapper.deleteById(chapterId);
+            return  result>0;
+        }
+
     }
 }

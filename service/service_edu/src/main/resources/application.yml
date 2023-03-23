@@ -21,7 +21,7 @@ eureka:
     register-with-eureka: false # 表示不向注册中心注册
     fetch-registry: false # 由于注册中心的职责就是维护服务实例，所以它不需要去检索服务
 mybatis-plus:
-  mapper-locations: classpath:/mapper/**/*.xml
+  mapper-locations: classpath:com/sport/eduservice/mapper/xml/*.xml
   #实体扫描，多个package用逗号或者分号分隔
   typeAliasesPackage: com.sport.eduservice.entity
   global-config:
