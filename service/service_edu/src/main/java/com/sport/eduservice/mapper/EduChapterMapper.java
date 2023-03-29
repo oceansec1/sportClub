@@ -19,5 +19,5 @@ import java.util.List;
 @Mapper
 public interface EduChapterMapper extends BaseMapper<EduChapter> {
 
-    List<EduChapter> selectList(QueryWrapper<ChapterVo> wrapperChapter);
+//    List<EduChapter> selectList(QueryWrapper<ChapterVo> wrapperChapter);
 }

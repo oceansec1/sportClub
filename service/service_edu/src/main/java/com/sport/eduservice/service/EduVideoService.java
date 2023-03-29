@@ -18,4 +18,6 @@ import java.util.List;
 public interface EduVideoService extends IService<EduVideo> {
 
     List<EduVideo> list(QueryWrapper<EduChapter> wrapperVideo);
+
+    void removeVideByCourseId(String courseId);
 }

@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/site")
 @CrossOrigin
 public class EduAreaController {
-    @Autowired
-    private EduAreaService service;
-    @PostMapping("/save")
-    public R save(@RequestBody EduAreaEntity entity) {
-        boolean save = service.save(entity);
-        if (save){
-            return R.success();
-        }
-        else {
-            return R.error();
-        }
-    }
+//    @Autowired
+//    private EduAreaService service;
+//    @PostMapping("/save")
+//    public R save(@RequestBody EduAreaEntity entity) {
+//        boolean save = service.save(entity);
+//        if (save){
+//            return R.success();
+//        }
+//        else {
+//            return R.error();
+//        }
+//    }
 }

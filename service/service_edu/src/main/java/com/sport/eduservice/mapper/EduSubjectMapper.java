@@ -19,5 +19,5 @@ import java.util.List;
 @Mapper
 public interface EduSubjectMapper extends BaseMapper<EduSubject> {
 
-    List<EduSubject> selectList(QueryWrapper<OneSubject> wrapperOne);
+    List<EduSubject> list(QueryWrapper<OneSubject> wrapperOne);
 }

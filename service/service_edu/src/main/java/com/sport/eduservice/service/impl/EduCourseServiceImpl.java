@@ -5,9 +5,11 @@ import com.sport.eduservice.entity.EduCourseDescription;
 import com.sport.eduservice.entity.vo.CourseInfoVo;
 import com.sport.eduservice.entity.vo.CoursePublishVo;
 import com.sport.eduservice.mapper.EduCourseMapper;
+import com.sport.eduservice.service.EduChapterService;
 import com.sport.eduservice.service.EduCourseDescriptionService;
 import com.sport.eduservice.service.EduCourseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.sport.eduservice.service.EduVideoService;
 import com.sport.exceptionhandler.SportException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,10 @@ import org.springframework.stereotype.Service;
 public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse> implements EduCourseService {
 @Autowired
 private EduCourseDescriptionService eduCourseDescriptionService;
+@Autowired
+private EduVideoService eduVideoService;
+@Autowired
+private EduChapterService chapterService;
     @Override
     public String saveCourseInfo(CourseInfoVo courseInfoVo) {
         //向课程表添加课程基本信息
@@ -78,5 +84,16 @@ private EduCourseDescriptionService eduCourseDescriptionService;
         //调用mapper
         CoursePublishVo publishCourseInfo = baseMapper.getPublishCourseInfo(id);
         return publishCourseInfo;
+    }
+//删除课程
+    @Override
+    public void removeCourse(String courseId) {
+        eduVideoService.removeVideByCourseId(courseId);
+        chapterService.removeChapterByCourseId(courseId);
+        eduCourseDescriptionService.removeById(courseId);
+        int result = baseMapper.deleteById(courseId);
+        if (result==0){
+            throw  new SportException(20001,"删除失败");
+        }
     }
 }

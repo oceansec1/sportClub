@@ -53,7 +53,7 @@ public class CodeGenerator {
         pc.setController("controller");
         pc.setEntity("entity");
         pc.setService("service");
-        pc.setMapper("mapper");
+        pc.setMapper("com/sport/eduservice/mapper/xml");
         mpg.setPackageInfo(pc);
 
         // 5、策略配置
