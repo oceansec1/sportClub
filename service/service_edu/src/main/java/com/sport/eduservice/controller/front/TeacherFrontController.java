@@ -15,6 +15,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/eduservice/teacherFront")
+@CrossOrigin
 public class TeacherFrontController {
 
 @Autowired
@@ -37,7 +38,7 @@ private EduCourseService courseService;
         EduTeacher eduTeacher = this.teacherService.getById(teacherId);
         //根据讲师id查询所有课程
         QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
-        wrapper.eq("id",teacherId);
+        wrapper.eq("teacher_id",teacherId);
         List<EduCourse> eduList = this.courseService.list(wrapper);
 
         return R.success().data("teacher",eduTeacher).data("courseList",eduList);
