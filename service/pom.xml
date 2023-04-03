@@ -13,6 +13,9 @@
     <modules>
         <module>service_edu</module>
         <module>service_oss</module>
+        <module>service-cms</module>
+        <module>service_msm</module>
+        <module>service_ucenter</module>
     </modules>
     <dependencies>
         <dependency>
@@ -84,7 +87,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-            <version>0.1.2.RELEASE</version>
+            <version>0.9.0.RELEASE</version>
 
         </dependency>
         <!--服务调用-->
