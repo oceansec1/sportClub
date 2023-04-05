@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/educenter/eduuser")
+@CrossOrigin
 public class EduUserController {
 @Autowired
     private EduUserService userService;

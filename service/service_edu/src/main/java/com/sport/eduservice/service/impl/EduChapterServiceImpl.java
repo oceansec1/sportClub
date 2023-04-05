@@ -84,4 +84,36 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         wrapper.eq("course_id",courseId);
         baseMapper.delete(wrapper);
     }
+
+    @Override
+    public List<ChapterVo> getChapterVideoByCourseId(String courseId) {
+        QueryWrapper<EduChapter> wrapperChapter = new QueryWrapper<>();
+        wrapperChapter.eq("course_id",courseId);
+        List<EduChapter> eduChapterList = baseMapper.selectList(wrapperChapter);
+
+        QueryWrapper<EduVideo> wrapperVideo = new QueryWrapper<>();
+        wrapperVideo.eq("course_id",courseId);
+        List<EduVideo> eduVideoList = this.eduVideoService.list(wrapperVideo);
+
+        List<ChapterVo> list = new ArrayList<>();
+        for (int i = 0; i < eduChapterList.size(); i++) {
+
+            EduChapter eduChapter = eduChapterList.get(i);
+            ChapterVo chapterVo = new ChapterVo();
+            BeanUtils.copyProperties(eduChapter,chapterVo);
+            list.add(chapterVo);
+
+            List<VideoVo> videoVoList = new ArrayList<>();
+            for (int j = 0; j < eduVideoList.size(); j++) {
+                EduVideo eduVideo = eduVideoList.get(j);
+                if(eduVideo.getChapterId().equals(eduChapter.getId())) {
+                    VideoVo videoVo = new VideoVo();
+                    BeanUtils.copyProperties(eduVideo,videoVo);
+                    videoVoList.add(videoVo);
+                }
+            }
+            chapterVo.setChildren(videoVoList);
+        }
+        return list;
+    }
 }

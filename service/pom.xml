@@ -16,6 +16,7 @@
         <module>service-cms</module>
         <module>service_msm</module>
         <module>service_ucenter</module>
+
     </modules>
     <dependencies>
         <dependency>
@@ -104,6 +105,10 @@
             <groupId>com.sport</groupId>
             <artifactId>common_utils</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sport</groupId>
+            <artifactId>common</artifactId>
         </dependency>
     </dependencies>
 

@@ -30,7 +30,7 @@ public class EduUser implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "学员ID")
-    @TableId(value = "id", type = IdType.ID_WORKER)
+    @TableId(value = "id")
     private String id;
 
     @ApiModelProperty(value = "手机号")

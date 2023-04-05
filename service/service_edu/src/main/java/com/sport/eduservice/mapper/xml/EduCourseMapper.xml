@@ -12,4 +12,21 @@
                            LEFT OUTER JOIN edu_subject es2 ON ec.subject_id=es2.id
         WHERE ec.id=#{courseId}
     </select>
+    <select id="getBaseCourseInfo" resultType="com.sport.eduservice.entity.frontvo.CourseWebVo"
+            parameterType="java.lang.String">
+
+        SELECT ec.id,ec.price,ec.lesson_num AS lessonNum,ec.title,ec.cover,
+               ec.buy_count AS buyCount,ec.view_count AS viewCount,ecd.description,
+               et.ID AS teacherId,et.`NAME` AS teacherName,et.EDUCATION,et.PIC_PATH,
+               es1.id AS subjectLevelOneId,es1.title AS subjectLevelOne,
+               es2.id AS subjectLevelTwoId,es2.title AS subjectLevelTwo
+
+
+        FROM edu_course ec LEFT OUTER JOIN edu_course_description ecd ON ec.id=ecd.id
+                           LEFT OUTER JOIN edu_teacher et ON ec.teacher_id=et.ID
+                           LEFT OUTER JOIN edu_subject es1 ON ec.subject_parent_id=es1.id
+                           LEFT OUTER JOIN edu_subject es2 ON ec.subject_id=es2.id
+        WHERE ec.id=#{courseId}
+
+    </select>
 </mapper>

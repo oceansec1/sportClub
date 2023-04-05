@@ -28,6 +28,17 @@ import java.util.List;
 public class EduTeacherController {
     @Autowired
     private EduTeacherServiceImpl eduTeacherService;
+
+    //获取教练个数
+    @GetMapping("getTotal")
+    public R getTotal(){
+         return R.success();
+    }
+
+
+
+
+
     @GetMapping("findAll")
     public R findAllTeacher(){
         //调用service方法
@@ -36,7 +47,7 @@ public class EduTeacherController {
 }
 //逻辑删除
 @DeleteMapping("/{id}")
-    public R removeTeacher(@PathVariable Integer id){
+        public R removeTeacher(@PathVariable String id){
     boolean result = eduTeacherService.removeById(id);
     if (result=true){
         return R.success();

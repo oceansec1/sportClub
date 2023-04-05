@@ -57,8 +57,7 @@ public class EduUserServiceImpl extends ServiceImpl<EduUserMapper, EduUser> impl
         //判断是否为空
         if(StringUtils.isEmpty(mobile) ||
                 StringUtils.isEmpty(nickname) ||
-                StringUtils.isEmpty(password) ||
-                StringUtils.isEmpty(code)) {
+                StringUtils.isEmpty(password)) {
             throw new SportException(20001,"error");
         }
         //获取验证码

@@ -1,3 +1,4 @@
+/*
 package com.sport.service_base;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -66,3 +67,4 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 }
 
+*/
