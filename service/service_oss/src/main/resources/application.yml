@@ -8,6 +8,6 @@ spring:
 aliyun:
   oss:
     end-point: oss-cn-beijing.aliyuncs.com
-    access-key-id: LTAI5tNEWzJZtaMRQLKCBsuZ
-    access-key-secret: S6HGuslH5LbnFpk9CTOUsSCCrI9GoJ
+    access-key-id: “Access Key”
+    access-key-secret: “Access secret”
     bucket-name: sport-club
